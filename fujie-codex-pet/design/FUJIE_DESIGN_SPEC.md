@@ -53,6 +53,10 @@ Girl persona names:
 - `哥哥`
 - `凌凌哥哥`
 
+Girl persona must not use bare `夜雨` as an address anywhere in the line. If a
+future line accidentally includes bare `夜雨`, the dialogue generator normalizes
+it back into the approved girl-name set.
+
 Mature persona may use colder variants such as `夜雨`, `哥哥`, or `凌凌哥哥`.
 Girl persona uses warmer, shorter, more openly cute spoken lines. Mature persona
 uses colder, more commanding lines while still sounding attached.
