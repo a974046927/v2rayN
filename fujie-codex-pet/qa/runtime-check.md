@@ -12,8 +12,8 @@
 
 ## Verified
 
-- Unit tests pass with `python -m unittest discover -s tests -v`: `37` tests.
-- Loop engineering baseline passes: `14/14` checks.
+- Unit tests pass with `python -m unittest discover -s tests -v`: `38` tests.
+- Loop engineering baseline passes: `15/15` checks.
 - Window startup works with Tkinter.
 - Window no longer uses enlarged `192x208` cells for desktop display.
 - Purple outline was addressed by converting alpha sprites to a hard key-color
@@ -29,6 +29,8 @@
 - Generated dialogue now favors short spoken lines and avoids obvious AI-style
   explanatory wording.
 - Girl persona names are limited to `夜雨哥哥`, `哥哥`, and `凌凌哥哥`.
+- Girl persona lines also reject bare `夜雨` anywhere in the line; accidental
+  bare addressing is normalized back into the approved girl-name set.
 - Emotion state persists as `mood` and `mood_intensity`; bubble colors,
   decorations, and outline weight follow the current emotion.
 - Click-region logic is implemented for face, hair, hand, body, and skirt/legs.
