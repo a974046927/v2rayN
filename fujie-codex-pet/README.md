@@ -25,6 +25,9 @@ another machine, including a Mac.
 - Comic speech bubbles change color, accent marks, and outline weight by mood.
 - The desktop shell prefers high-resolution row strips so the pet does not look
   blurry when displayed larger than Codex atlas size.
+- The large desktop shell is the canonical display. The currently selected
+  built-in Codex avatar was made transparent to avoid showing a second small pet
+  when the summon button is used.
 - Double click switches between girl and mature forms.
 - Middle click or Ctrl+left click opens interactive question mode.
 - Question mode searches local project/transfer documents first, then uses an
