@@ -1,6 +1,6 @@
 # Loop engineering baseline
 
-Loop engineering baseline: 15/15 checks pass.
+Loop engineering baseline: 16/16 checks pass.
 
 - `click_regions`: PASS - face/hair/body/hand/skirt_legs mapped
 - `affection_attention_state`: PASS - affection, attention, mood persist
@@ -15,5 +15,6 @@ Loop engineering baseline: 15/15 checks pass.
 - `interactive_question_mode`: PASS - question mode returns a pet-styled answer
 - `local_search`: PASS - local search adapter is available and safe
 - `ai_adapter_fallback`: PASS - AI adapter has offline fallback
+- `voice_interaction_flow`: PASS - recognized speech is answered and sent to voice reply
 - `voice_fallback`: PASS - voice recognizer degrades without crashing
 - `github_sync_folder`: PASS - sync target is fujie-codex-pet/

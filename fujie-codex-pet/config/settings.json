@@ -1,0 +1,23 @@
+{
+  "weather": {
+    "weather_city": ""
+  },
+  "window": {
+    "scale": 1.0,
+    "start_x": 1120,
+    "start_y": 560,
+    "animation_ms": 260
+  },
+  "reminders": {
+    "rest_minutes": 50,
+    "move_minutes": 90,
+    "late_night_hour": 23
+  },
+  "voice": {
+    "enabled": true,
+    "reply_enabled": true,
+    "timeout_seconds": 5,
+    "tts_rate": 0,
+    "tts_volume": 90
+  }
+}

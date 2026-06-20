@@ -1,88 +1,52 @@
 # 富江 GitHub Sync Notes
 
-Recommended repository:
-
-- `a974046927/fujie-codex-pet`
-
-Do not place this pet package inside unrelated repositories such as `v2rayN`
-unless explicitly requested.
-
-## Repository Layout
-
-Use this layout when uploading to GitHub under `fujie-codex-pet/`:
-
-```text
-fujie-codex-pet/README.md
-fujie-codex-pet/MAC_SYNC.md
-fujie-codex-pet/GITHUB_SYNC.md
-fujie-codex-pet/LOOP_ENGINEERING.md
-fujie-codex-pet/MANIFEST.sha256
-fujie-codex-pet/design/FUJIE_DESIGN_SPEC.md
-fujie-codex-pet/codex-pet-fujie/pet.json
-fujie-codex-pet/source/yoruame_pet/*.py
-fujie-codex-pet/tests/*.py
-fujie-codex-pet/qa/runtime-check.md
-fujie-codex-pet/qa/loop-engineering-baseline.md
-fujie-codex-pet/qa/codex-avatar-size.md
-```
-
-## Codex Pet Metadata
-
-```json
-{
-  "id": "fujie",
-  "displayName": "富江",
-  "description": "富江",
-  "spritesheetPath": "spritesheet.webp"
-}
-```
-
-## Current Local Evidence
-
-- Local Codex pet folder: `C:\Users\lenovo\.codex\pets\fujie`
-- Transfer ZIP: `E:\Codex 项目\杂谈\fujie-codex-pet-transfer.zip`
-- Desktop shell: `E:\Codex 项目\杂谈\yoruame-desktop-pet`
-- Tests: `38` passing via `python -m unittest discover -s tests -v`
-- Loop engineering baseline: `15/15` passing via
-  `python -m yoruame_pet.loop_benchmark`
-- Latest local commit: updated after each feature/fix sync
-
-## Current GitHub Status
-
-The connected GitHub account is `a974046927`. The only writable repository
-visible during the last sync check was:
-
-- `a974046927/v2rayN`
-
-The user requested a GitHub document rather than a new repository. The document
-has been created and verified:
+## Target
 
 - Repository: `a974046927/v2rayN`
-- Path: `fujie-codex-pet.md`
-- URL: `https://github.com/a974046927/v2rayN/blob/master/fujie-codex-pet.md`
-- Commit: `ad9370d40491dd71e26f6f46567b7a460669767a`
-- Blob SHA: `e97e9bde75d75191db4f89e2b15823e62e4baea4`
+- Folder: `fujie-codex-pet/`
+- Sync method: GitHub connector, not local `git push`, because local git login was unavailable.
 
-New features and fixes are now synchronized into the `fujie-codex-pet/` folder
-inside `a974046927/v2rayN`, matching the user's requested location. A dedicated
-repository such as `a974046927/fujie-codex-pet` is still preferable if full
-binary assets should be hosted on GitHub later.
+A dedicated repository such as `a974046927/fujie-codex-pet` would still be cleaner later, but the user requested this GitHub project folder for now.
+
+## Latest Local Evidence
+
+- Local app path: `E:\Codex 项目\杂谈\yoruame-desktop-pet`
+- Transfer ZIP: `E:\Codex 项目\杂谈\fujie-codex-pet-transfer.zip`
+- Latest local commit: `2fe8579 Add voice interaction flow`
+- Tests: `41` passing via `python -m unittest discover -s tests -v`
+- Loop engineering baseline: `16/16` passing via `python -m yoruame_pet.loop_benchmark`
+- Speech dependencies installed locally: `SpeechRecognition 3.17.0`, `PyAudio 0.2.14`
+- Audio device discovery worked locally; 44 input/output devices were detected, including `麦克风阵列 (Realtek(R) Audio)`.
 
 ## Latest Feature Sync Scope
 
 The latest implemented feature batch includes:
 
-- click-region interaction behavior
-- affection, attention, persona, mood, and mood-intensity state
-- random scare and lower-frequency idle talk
-- double-click form switching
-- generated dialogue system
-- hard girl-persona addressing rule: only `夜雨哥哥`, `哥哥`, or `凌凌哥哥`
-- rest, movement, and late-night reminders
-- weather location/source tracking
-- interactive typed question mode
-- local document search
-- AI-provider adapter with offline fallback
-- optional voice-recognition adapter with safe unavailable fallback
-- large desktop shell kept as canonical display; small Codex custom avatar
-  selection disabled after rolling back the transparent-atlas workaround
+- background voice question mode
+- Windows voice reply speaker
+- `语音` button in the question panel
+- `V` hotkey on the focused pet window
+- safe fallback when microphone, recognition, or speech output is unavailable
+- voice config keys: `enabled`, `reply_enabled`, `timeout_seconds`, `tts_rate`, `tts_volume`
+- loop benchmark gate: `voice_interaction_flow`
+- new voice interaction unit tests
+
+## Current Runtime Behavior
+
+1. Open the pet.
+2. Middle click or Ctrl+left click to open the question panel.
+3. Click `语音`, or press `V` while the pet window has focus.
+4. Wait for `我在听，哥哥你说。`.
+5. Speak the question.
+6. The recognized Chinese text goes through the same assistant flow as typed questions.
+7. The pet displays the answer in the manga bubble and sends the pet-styled line to Windows speech synthesis when enabled.
+
+## Girl Persona Addressing Rule
+
+少女模式只能称呼用户为：
+
+- `夜雨哥哥`
+- `哥哥`
+- `凌凌哥哥`
+
+Bare `夜雨` must not appear as a girl-persona address.
