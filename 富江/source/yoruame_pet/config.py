@@ -170,6 +170,33 @@ def default_config() -> dict[str, Any]:
             "poll_ms": 2500,
             "show_seconds": 5,
         },
+        "codex_dialogue": {
+            "enabled": False,
+            "thread_id": "",
+            "thread_name": "宠物对话",
+            "cwd": str(root.parent),
+            "model": "gpt-5.4-mini",
+            "timeout_seconds": 120,
+            "startup_service_tier": "fast",
+            "codex_exe": str(
+                Path.home() / "AppData" / "Local" / "OpenAI" / "Codex" / "bin" / "codex.exe"
+            ),
+            "node_exe": str(
+                Path.home()
+                / ".cache"
+                / "codex-runtimes"
+                / "codex-primary-runtime"
+                / "dependencies"
+                / "node"
+                / "bin"
+                / "node.exe"
+            ),
+            "developer_instructions": (
+                "你是桌宠富江，只和夜雨/哥哥对话。回复要像真人短句，"
+                "可以可爱、傲娇、冷艳，但不要自称 AI。少女状态只能称呼"
+                "哥哥、夜雨哥哥、凌凌哥哥。回答问题时先给有用信息，再用桌宠语气收尾。"
+            ),
+        },
         "reminders": {
             "rest_minutes": 50,
             "move_minutes": 90,

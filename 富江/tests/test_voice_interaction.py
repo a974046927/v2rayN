@@ -9,6 +9,77 @@ sys.path.insert(0, str(ROOT / "src"))
 
 
 class VoiceInteractionTests(unittest.TestCase):
+    def test_voice_question_uses_codex_dialogue_bridge_before_local_fallback(self):
+        from yoruame_pet.app import YoruamePetApp
+        from yoruame_pet.assistant_mode import AssistantAnswer
+        from yoruame_pet.voice import VoiceResult
+
+        class FakeRecognizer:
+            def listen(self):
+                return VoiceResult(
+                    text="\u5e2e\u6211\u67e5\u4e00\u4e0b\u4eca\u5929\u8981\u4e0d\u8981\u4f11\u606f",
+                    available=True,
+                    message="\u6211\u542c\u5230\u4e86\u3002",
+                )
+
+        class FakeCodexDialogue:
+            def __init__(self):
+                self.questions = []
+
+            def ask(self, question: str) -> AssistantAnswer:
+                self.questions.append(question)
+                return AssistantAnswer(
+                    text="\u5ba0\u7269\u5bf9\u8bdd\u56de\u590d\uff1a\u8d77\u6765\u8d70\u4e00\u4e0b\u3002",
+                    source="codex_thread",
+                    pet_line="\u54e5\u54e5\uff0c\u8d77\u6765\u8d70\u4e00\u4e0b\u3002",
+                    citations=[],
+                )
+
+        class FailingAssistant:
+            def ask(self, _question: str) -> AssistantAnswer:
+                raise AssertionError("local fallback should not be used when Codex dialogue replies")
+
+        class FakeSpeaker:
+            def __init__(self):
+                self.spoken = []
+
+            def speak(self, text: str):
+                self.spoken.append(text)
+
+        app = YoruamePetApp(headless=True)
+        bridge = FakeCodexDialogue()
+        speaker = FakeSpeaker()
+        app.voice_recognizer = FakeRecognizer()
+        app.codex_dialogue = bridge
+        app.assistant = FailingAssistant()
+        app.voice_speaker = speaker
+
+        result = app.listen_for_question()
+
+        self.assertTrue(result.available)
+        self.assertEqual(bridge.questions, ["\u5e2e\u6211\u67e5\u4e00\u4e0b\u4eca\u5929\u8981\u4e0d\u8981\u4f11\u606f"])
+        self.assertEqual(app.bubble_text, "\u54e5\u54e5\uff0c\u8d77\u6765\u8d70\u4e00\u4e0b\u3002")
+        self.assertEqual(speaker.spoken, ["\u54e5\u54e5\uff0c\u8d77\u6765\u8d70\u4e00\u4e0b\u3002"])
+
+    def test_middle_click_starts_voice_interaction(self):
+        from yoruame_pet.app import YoruamePetApp
+
+        app = YoruamePetApp(headless=True)
+        calls = []
+
+        def start_voice():
+            calls.append("voice")
+
+        def open_question_window():
+            raise AssertionError("middle click should start voice interaction directly")
+
+        app.start_voice_interaction = start_voice
+        app.open_question_window = open_question_window
+
+        app._on_middle_click(None)
+
+        self.assertEqual(calls, ["voice"])
+
     def test_voice_question_answers_recognized_text_and_speaks_reply(self):
         from yoruame_pet.app import YoruamePetApp
         from yoruame_pet.assistant_mode import AssistantAnswer

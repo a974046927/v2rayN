@@ -14,7 +14,8 @@ from PIL import Image, ImageTk
 from .atlas import DesktopFrameSource
 from .assistant_mode import AssistantAnswer, PetAssistant
 from .brain import PetAction, PetBrain
-from .config import load_config
+from .codex_dialogue import build_codex_dialogue_bridge
+from .config import load_config, project_root
 from .codex_status import CodexTaskStatusWatcher
 from .hit_regions import classify_region
 from .local_search import LocalSearch
@@ -200,6 +201,14 @@ class YoruamePetApp:
                 ]
             )
         )
+        self.codex_dialogue = (
+            None
+            if headless
+            else build_codex_dialogue_bridge(
+                self.config.get("codex_dialogue", {}),
+                project_root().parent,
+            )
+        )
         self.voice_recognizer = VoiceRecognizer(
             enabled=bool(self.config["voice"]["enabled"]),
             timeout_seconds=int(self.config["voice"]["timeout_seconds"]),
@@ -303,6 +312,8 @@ class YoruamePetApp:
         self.canvas.bind("<Control-Button-1>", self._on_middle_click)
         self.root.bind("<KeyPress-v>", self._on_voice_hotkey)
         self.root.bind("<KeyPress-V>", self._on_voice_hotkey)
+        self.root.bind("<KeyPress-q>", self._on_question_hotkey)
+        self.root.bind("<KeyPress-Q>", self._on_question_hotkey)
         self._render()
 
     def _schedule_loops(self) -> None:
@@ -429,7 +440,11 @@ class YoruamePetApp:
         self.state.save(self.state_path)
 
     def answer_question(self, question: str) -> AssistantAnswer:
-        answer = self.assistant.ask(question)
+        answer = None
+        if self.codex_dialogue is not None:
+            answer = self.codex_dialogue.ask(question)
+        if answer is None:
+            answer = self.assistant.ask(question)
         self.current_animation = "review"
         self.state.set_emotion("review", 5)
         self.say(answer.pet_line, seconds=8, mood="review", intensity=5)
@@ -753,11 +768,15 @@ class YoruamePetApp:
 
     def _on_middle_click(self, _event: tk.Event) -> None:
         self.last_motion_at = datetime.now()
-        self.open_question_window()
+        self.start_voice_interaction()
 
     def _on_voice_hotkey(self, _event: tk.Event) -> None:
         self.last_motion_at = datetime.now()
         self.start_voice_interaction()
+
+    def _on_question_hotkey(self, _event: tk.Event) -> None:
+        self.last_motion_at = datetime.now()
+        self.open_question_window()
 
     def open_question_window(self) -> None:
         if self.root is None:

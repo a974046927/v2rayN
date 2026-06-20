@@ -37,3 +37,11 @@ The pet now has a voice interaction path in the desktop shell.
 ## Local Runtime
 
 The desktop pet was restarted locally after the update. The latest observed process was `pythonw.exe -m yoruame_pet`.
+## 2026-06-21 Update
+
+- Middle click or Ctrl+left click now starts microphone voice interaction directly.
+- `V` still starts voice interaction.
+- `Q` opens the typed question window.
+- Recognized speech is sent to the active Codex thread `宠物对话` (`019ee617-e56c-7833-a036-4850de2ece1a`).
+- The returned Codex reply is shown in the desktop pet manga bubble and spoken when voice reply is enabled.
+- Verification now covers 49 unit tests and an 18/18 loop baseline.

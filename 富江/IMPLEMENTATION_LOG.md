@@ -35,3 +35,23 @@
 The latest fix adds a test that samples all girl-persona moods and triggers. It fails if a generated girl line starts with any unapproved address or contains bare `夜雨` after approved names are removed.
 
 The dialogue generator now exposes `GIRL_APPROVED_NAMES = ("夜雨哥哥", "哥哥", "凌凌哥哥")` and normalizes accidental bare `夜雨` in girl-persona output back into the approved name set. Weather rain reminders were also changed from bare `夜雨` to `哥哥` so direct weather bubbles do not bypass the rule.
+
+## 2026-06-21
+
+### Local Commits
+
+- pending: Codex dialogue bridge and GitHub 富江 sync update
+
+### Latest Verification
+
+- Unit tests: `49` passing via `python -m unittest discover -s tests -p 'test_*.py'`
+- Loop engineering baseline: `18/18` passing via `python -m yoruame_pet.loop_benchmark`
+- Real bridge smoke test returned: `收到，哥哥，桥接初始化正常。`
+
+### Landed Features
+
+- local Codex app-server bridge for the desktop pet dialogue thread
+- microphone speech now goes into the active `宠物对话` thread
+- returned Codex replies are displayed in the desktop pet bubble
+- middle click/Ctrl+left starts voice directly; `Q` opens typed questions
+- active thread id recorded in `config/settings.json`

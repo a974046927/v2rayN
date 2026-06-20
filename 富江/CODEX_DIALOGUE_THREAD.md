@@ -23,3 +23,10 @@ Core rules sent to the thread:
 ## Local Desktop Pet Relation
 
 The desktop pet still has its own small `问富江` question panel and voice path. The Codex thread is the direct display place for the user's longer pet dialogue.
+## 2026-06-21 Runtime Bridge Update
+
+- Active thread title: `宠物对话`.
+- Active resumable thread id: `019ee617-e56c-7833-a036-4850de2ece1a`.
+- The earlier thread `019ee5c4-f0b8-7951-87a0-2600aaabe3cd` could not be resumed by `codex app-server`; it was renamed to `宠物对话-旧备份` and archived without deletion.
+- The desktop pet now sends recognized microphone text into the active `宠物对话` thread through local Codex app-server, then displays the returned reply in the pet bubble.
+- The bridge uses local Codex CLI/app-server and does not require an external API key.
