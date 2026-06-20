@@ -23,6 +23,7 @@ fujie-codex-pet/source/yoruame_pet/*.py
 fujie-codex-pet/tests/*.py
 fujie-codex-pet/qa/runtime-check.md
 fujie-codex-pet/qa/loop-engineering-baseline.md
+fujie-codex-pet/qa/codex-avatar-size.md
 ```
 
 ## Codex Pet Metadata
@@ -83,3 +84,5 @@ The latest implemented feature batch includes:
 - local document search
 - AI-provider adapter with offline fallback
 - optional voice-recognition adapter with safe unavailable fallback
+- large desktop shell kept as canonical display; small Codex summon avatar
+  backed up and replaced with a transparent atlas
