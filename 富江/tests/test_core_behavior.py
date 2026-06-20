@@ -26,6 +26,18 @@ class CoreBehaviorTests(unittest.TestCase):
         self.assertGreaterEqual(config["reminders"]["rest_minutes"], 1)
         self.assertIn("weather_city", config["weather"])
 
+    def test_standby_running_and_jumping_are_visible_without_being_hyperactive(self):
+        from yoruame_pet.config import default_config
+
+        dialogue = default_config()["dialogue"]
+        idle_loop_seconds = dialogue["idle_loop_ms"] / 1000
+        idle_motion_chance = dialogue["idle_motion_chance"]
+        per_specific_motion_seconds = idle_loop_seconds / (idle_motion_chance / 5)
+
+        self.assertLessEqual(per_specific_motion_seconds, 360)
+        self.assertLessEqual(idle_motion_chance, 0.4)
+        self.assertLessEqual(dialogue["ignored_chance"], 0.25)
+
     def test_load_config_merges_user_overrides_without_losing_defaults(self):
         from yoruame_pet.config import load_config
 

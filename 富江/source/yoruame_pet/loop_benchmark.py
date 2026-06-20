@@ -266,7 +266,7 @@ def _check_codex_task_status_bridge() -> LoopCheck:
 def _check_github_sync_folder() -> LoopCheck:
     config = default_config()
     ok = bool(config)
-    return LoopCheck("github_sync_folder", ok, "sync target is fujie-codex-pet/")
+    return LoopCheck("github_sync_folder", ok, "sync target is 富江/")
 
 
 def main() -> None:

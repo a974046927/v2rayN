@@ -19,4 +19,4 @@ Loop engineering baseline: 18/18 checks pass.
 - `voice_interaction_flow`: PASS - recognized speech is answered and sent to voice reply
 - `voice_fallback`: PASS - voice recognizer degrades without crashing
 - `codex_task_status_bridge`: PASS - desktop pet reads local Codex task events
-- `github_sync_folder`: PASS - sync target is fujie-codex-pet/
+- `github_sync_folder`: PASS - sync target is 富江/

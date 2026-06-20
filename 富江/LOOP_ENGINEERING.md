@@ -12,12 +12,12 @@ The loop is:
 5. Run the local baseline command.
 6. Update transfer/GitHub sync documents.
 7. Restart the pet and verify the runtime process.
-8. Sync the latest changed files to GitHub under `fujie-codex-pet/`.
+8. Sync the latest changed files to GitHub under `富江/`.
 
 ## Current Baseline
 
 ```text
-Loop engineering baseline: 17/17 checks pass.
+Loop engineering baseline: 18/18 checks pass.
 
 click_regions
 affection_attention_state

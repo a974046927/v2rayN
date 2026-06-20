@@ -16,7 +16,7 @@
 
 ## Verified
 
-- Unit tests pass with bundled Python and `python -m unittest discover -s tests -v`: `43` tests.
+- Unit tests pass with bundled Python and `python -m unittest discover -s tests -v`: `45` tests.
 - Loop engineering baseline passes: `18/18` checks.
 - Speech recognition dependencies are installed in the bundled Python runtime:
   `SpeechRecognition 3.17.0` and `PyAudio 0.2.14`.
@@ -32,6 +32,10 @@
 - Standby ambient motion is restored: ordinary idle can now low-frequency
   rotate through waving, running, and jumping, with running/jumping slowed to
   `420ms` per frame.
+- Standby motion trigger rate is now `35%` per idle check, so running and
+  jumping are visible in normal use without changing frame speed.
+- Ignored/annoyed standby behavior is now probabilistic instead of blocking the
+  ambient motion pool after the ignored threshold.
 - Dialogue bubble changed from a plain rectangle to a comic-style rounded
   speech bubble with a tail, thicker black outline, cute font candidates, and
   slightly cuter symbol/emoji dialogue.
@@ -88,4 +92,5 @@
 - In the question panel, click `语音` and speak after the pet says
   `我在听，哥哥你说。`
 - Press `V` while the pet window has focus to start the same voice interaction.
-- Long idle behavior is acceptable.
+- Long idle behavior still shows varied ambient motion, including running and
+  jumping, while occasionally allowing ignored/annoyed reactions.

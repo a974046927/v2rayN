@@ -9,22 +9,22 @@ unless explicitly requested.
 
 ## Repository Layout
 
-Use this layout when uploading to GitHub under `fujie-codex-pet/`:
+Use this layout when uploading to GitHub under `富江/`:
 
 ```text
-fujie-codex-pet/README.md
-fujie-codex-pet/MAC_SYNC.md
-fujie-codex-pet/GITHUB_SYNC.md
-fujie-codex-pet/LOOP_ENGINEERING.md
-fujie-codex-pet/MANIFEST.sha256
-fujie-codex-pet/design/FUJIE_DESIGN_SPEC.md
-fujie-codex-pet/codex-pet-fujie/pet.json
-fujie-codex-pet/config/settings.json
-fujie-codex-pet/source/yoruame_pet/*.py
-fujie-codex-pet/tests/*.py
-fujie-codex-pet/qa/runtime-check.md
-fujie-codex-pet/qa/loop-engineering-baseline.md
-fujie-codex-pet/qa/codex-avatar-size.md
+富江/README.md
+富江/MAC_SYNC.md
+富江/GITHUB_SYNC.md
+富江/LOOP_ENGINEERING.md
+富江/MANIFEST.sha256
+富江/design/FUJIE_DESIGN_SPEC.md
+富江/codex-pet-fujie/pet.json
+富江/config/settings.json
+富江/source/yoruame_pet/*.py
+富江/tests/*.py
+富江/qa/runtime-check.md
+富江/qa/loop-engineering-baseline.md
+富江/qa/codex-avatar-size.md
 ```
 
 ## Codex Pet Metadata
@@ -43,8 +43,8 @@ fujie-codex-pet/qa/codex-avatar-size.md
 - Local Codex pet folder: `C:\Users\lenovo\.codex\pets\fujie`
 - Transfer ZIP: `E:\Codex 项目\杂谈\fujie-codex-pet-transfer.zip`
 - Desktop shell: `E:\Codex 项目\杂谈\yoruame-desktop-pet`
-- Tests: `42` passing via `python -m unittest discover -s tests -v`
-- Loop engineering baseline: `17/17` passing via
+- Tests: `45` passing via `python -m unittest discover -s tests -v`
+- Loop engineering baseline: `18/18` passing via
   `python -m yoruame_pet.loop_benchmark`
 - Latest local commit: updated after each feature/fix sync
 
@@ -64,7 +64,7 @@ has been created and verified:
 - Commit: `ad9370d40491dd71e26f6f46567b7a460669767a`
 - Blob SHA: `e97e9bde75d75191db4f89e2b15823e62e4baea4`
 
-New features and fixes are now synchronized into the `fujie-codex-pet/` folder
+New features and fixes are now synchronized into the `富江/` folder
 inside `a974046927/v2rayN`, matching the user's requested location. A dedicated
 repository such as `a974046927/fujie-codex-pet` is still preferable if full
 binary assets should be hosted on GitHub later.

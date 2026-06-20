@@ -1,5 +1,6 @@
 import sys
 import unittest
+from datetime import datetime, timedelta
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,6 +66,38 @@ class AtlasAndAppTests(unittest.TestCase):
 
         self.assertGreaterEqual(idle_delay, 450)
         self.assertLess(app.animation_delay_ms(), idle_delay)
+
+    def test_long_idle_can_still_play_ambient_motion(self):
+        from yoruame_pet.app import YoruamePetApp
+
+        class FakeRoot:
+            def __init__(self):
+                self.delays = []
+
+            def after(self, delay, callback):
+                self.delays.append((delay, callback))
+
+        class FixedRng:
+            def random(self):
+                return 0.06
+
+            def randint(self, _start, _end):
+                return 2
+
+        app = YoruamePetApp(headless=True)
+        app.root = FakeRoot()
+        app.rng = FixedRng()
+        app.config["dialogue"]["idle_motion_chance"] = 0.35
+        app.config["dialogue"]["scare_chance"] = 0.04
+        app.config["dialogue"]["idle_talk_chance"] = 0.12
+        app.config["dialogue"]["ignored_chance"] = 0.22
+        app.last_motion_at = datetime.now() - timedelta(
+            seconds=app.config["dialogue"]["ignored_seconds"] + 1
+        )
+
+        app._idle_loop()
+
+        self.assertEqual(app.current_animation, "jumping")
 
     def test_window_frame_uses_key_background_without_purple_visible_halo(self):
         from yoruame_pet.app import prepare_window_frame

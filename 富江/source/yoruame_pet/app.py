@@ -322,27 +322,30 @@ class YoruamePetApp:
     def _idle_loop(self) -> None:
         now = datetime.now()
         ignored_seconds = int(self.config["dialogue"]["ignored_seconds"])
-        if now - self.last_motion_at > timedelta(seconds=ignored_seconds):
+        ignored = now - self.last_motion_at > timedelta(seconds=ignored_seconds)
+        roll = self.rng.random()
+        scare_chance = float(self.config["dialogue"]["scare_chance"])
+        motion_chance = float(self.config["dialogue"].get("idle_motion_chance", 0.0))
+        ignored_chance = (
+            float(self.config["dialogue"].get("ignored_chance", 0.22)) if ignored else 0.0
+        )
+        talk_chance = float(self.config["dialogue"]["idle_talk_chance"])
+        if roll < scare_chance:
+            self.show_action(self.brain.scare(self.state, seed=self.rng.randint(0, 10000)))
+        elif roll < scare_chance + motion_chance:
+            self.show_action(
+                self.brain.idle_action(self.state, seed=self.rng.randint(0, 10000))
+            )
+        elif ignored and roll < scare_chance + motion_chance + ignored_chance:
             self.show_action(self.brain.ignored(self.state, seed=self.rng.randint(0, 10000)))
-        else:
-            roll = self.rng.random()
-            scare_chance = float(self.config["dialogue"]["scare_chance"])
-            motion_chance = float(self.config["dialogue"].get("idle_motion_chance", 0.0))
-            talk_chance = float(self.config["dialogue"]["idle_talk_chance"])
-            if roll < scare_chance:
-                self.show_action(self.brain.scare(self.state, seed=self.rng.randint(0, 10000)))
-            elif roll < scare_chance + motion_chance:
-                self.show_action(
-                    self.brain.idle_action(self.state, seed=self.rng.randint(0, 10000))
-                )
-            elif roll < scare_chance + motion_chance + talk_chance:
-                action = self.brain.click(
-                    self.state,
-                    "face",
-                    now,
-                    seed=self.rng.randint(0, 10000),
-                )
-                self.show_action(action)
+        elif roll < scare_chance + motion_chance + ignored_chance + talk_chance:
+            action = self.brain.click(
+                self.state,
+                "face",
+                now,
+                seed=self.rng.randint(0, 10000),
+            )
+            self.show_action(action)
         assert self.root is not None
         self.root.after(int(self.config["dialogue"]["idle_loop_ms"]), self._idle_loop)
 

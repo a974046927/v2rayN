@@ -17,7 +17,8 @@
     }
   },
   "dialogue": {
-    "idle_motion_chance": 0.1
+    "idle_motion_chance": 0.35,
+    "ignored_chance": 0.22
   },
   "reminders": {
     "rest_minutes": 50,

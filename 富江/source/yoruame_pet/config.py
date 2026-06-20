@@ -154,7 +154,8 @@ def default_config() -> dict[str, Any]:
             "idle_first_delay_ms": 12000,
             "scare_chance": 0.04,
             "idle_talk_chance": 0.12,
-            "idle_motion_chance": 0.1,
+            "idle_motion_chance": 0.35,
+            "ignored_chance": 0.22,
         },
         "voice": {
             "enabled": False,
