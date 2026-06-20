@@ -14,7 +14,7 @@ Loop engineering baseline: 16/16 checks pass.
 - `weather_location_source`: PASS - weather keeps resolved location and source
 - `interactive_question_mode`: PASS - question mode returns a pet-styled answer
 - `local_search`: PASS - local search adapter is available and safe
-- `ai_adapter_fallback`: PASS - AI adapter has offline fallback
+- `local_pet_reply`: PASS - unmatched questions use local pet dialogue
 - `voice_interaction_flow`: PASS - recognized speech is answered and sent to voice reply
 - `voice_fallback`: PASS - voice recognizer degrades without crashing
 - `github_sync_folder`: PASS - sync target is fujie-codex-pet/

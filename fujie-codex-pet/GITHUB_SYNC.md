@@ -6,40 +6,31 @@
 - Folder: `fujie-codex-pet/`
 - Sync method: GitHub connector, not local `git push`, because local git login was unavailable.
 
-A dedicated repository such as `a974046927/fujie-codex-pet` would still be cleaner later, but the user requested this GitHub project folder for now.
-
 ## Latest Local Evidence
 
 - Local app path: `E:\Codex 项目\杂谈\yoruame-desktop-pet`
 - Transfer ZIP: `E:\Codex 项目\杂谈\fujie-codex-pet-transfer.zip`
-- Latest local commit: `2fe8579 Add voice interaction flow`
-- Tests: `41` passing via `python -m unittest discover -s tests -v`
+- Latest local commit: `9516457 Use Codex thread for pet dialogue`
+- Tests: `40` passing via `python -m unittest discover -s tests -v`
 - Loop engineering baseline: `16/16` passing via `python -m yoruame_pet.loop_benchmark`
-- Speech dependencies installed locally: `SpeechRecognition 3.17.0`, `PyAudio 0.2.14`
-- Audio device discovery worked locally; 44 input/output devices were detected, including `麦克风阵列 (Realtek(R) Audio)`.
+- Active runtime restarted as `pythonw.exe -m yoruame_pet`.
+
+## Dialogue Thread
+
+The Codex thread `添加宠物对话` is configured as the dedicated user/pet dialogue thread.
+
+- Thread id: `019ee5c4-f0b8-7951-87a0-2600aaabe3cd`
+- The thread was initialized with Fujie's pet persona and addressing rules.
+- Future conversation with the pet should happen directly in that Codex thread.
+- The desktop pet still keeps its local question panel and voice path; it does not create a second local chat log.
 
 ## Latest Feature Sync Scope
 
-The latest implemented feature batch includes:
-
-- background voice question mode
-- Windows voice reply speaker
-- `语音` button in the question panel
-- `V` hotkey on the focused pet window
-- safe fallback when microphone, recognition, or speech output is unavailable
-- voice config keys: `enabled`, `reply_enabled`, `timeout_seconds`, `tts_rate`, `tts_volume`
-- loop benchmark gate: `voice_interaction_flow`
-- new voice interaction unit tests
-
-## Current Runtime Behavior
-
-1. Open the pet.
-2. Middle click or Ctrl+left click to open the question panel.
-3. Click `语音`, or press `V` while the pet window has focus.
-4. Wait for `我在听，哥哥你说。`.
-5. Speak the question.
-6. The recognized Chinese text goes through the same assistant flow as typed questions.
-7. The pet displays the answer in the manga bubble and sends the pet-styled line to Windows speech synthesis when enabled.
+- no external API required for desktop fallback replies
+- local document search remains first priority
+- unmatched desktop questions use local pet-style reply instead of mentioning missing external AI
+- Codex thread `添加宠物对话` is the direct display surface for user/pet dialogue
+- voice interaction remains available on the desktop pet
 
 ## Girl Persona Addressing Rule
 

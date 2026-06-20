@@ -15,20 +15,6 @@
 - Mature form: colder gaze, more composed expression, natural jawline, not a sharp V-shaped chin.
 - Split-face horror state: second face emerges from the face area, more scary and distorted than normal expressions.
 
-## Animation States
-
-The Codex atlas uses the standard 9-row state contract:
-
-- `idle`: quiet breathing/blinking.
-- `running-right`: dragging/moving right.
-- `running-left`: dragging/moving left.
-- `waving`: greeting.
-- `jumping`: sudden reaction.
-- `failed`: mature split-face scare/failure state.
-- `waiting`: waiting for attention or approval.
-- `running`: focused work/thinking.
-- `review`: review/inspection gaze.
-
 ## Interaction Rules
 
 - Face/hair click: affectionate or teasing response.
@@ -36,62 +22,26 @@ The Codex atlas uses the standard 9-row state contract:
 - Skirt/legs click: shy, evasive, non-explicit response.
 - Right click: scare/split-face gag.
 - Double left click: switch between girl and mature forms.
-- Middle click or Ctrl+left click: open the interactive question panel.
-- Ignored too long: she pouts, becomes mature/cold, or demands attention.
-- Responding after ignored: she softens and becomes cute again.
+- Middle click or Ctrl+left click: open the desktop question panel.
+- The Codex thread `添加宠物对话` is the dedicated long-form user/pet dialogue place.
 
-## Dialogue And Emotion System
+## Dialogue Thread
 
-Girl persona names:
+The Codex thread `添加宠物对话` is initialized as the user/pet dialogue thread:
 
-- `夜雨哥哥`
-- `哥哥`
-- `凌凌哥哥`
+- The user can type directly in that Codex thread to talk with Fujie.
+- The thread should reply as Fujie, not as a technical assistant, unless technical handling is explicitly requested.
+- Girl persona may only use `夜雨哥哥`, `哥哥`, and `凌凌哥哥`.
+- Replies should be short, emotionally alive, affectionate, slightly possessive, and not AI-flavored.
 
-Girl persona must not use bare `夜雨` as an address anywhere in the line. If a future line accidentally includes bare `夜雨`, the dialogue generator normalizes it back into the approved girl-name set.
+## Desktop Question Mode
 
-Mature persona may use colder variants such as `夜雨`, `哥哥`, or `凌凌哥哥`. Girl persona uses warmer, shorter, more openly cute spoken lines. Mature persona uses colder, more commanding lines while still sounding attached.
+The desktop shell still includes a small question panel and voice interaction:
 
-Dialogue should be generated from emotion context, not selected from fixed full sentence templates. The generator should combine current persona, current emotion, trigger source, affection level, and emotion intensity.
-
-Lines should feel like short human turns, not AI explanations. Avoid words such as `system`, `trigger`, `current`, or `generated`; prefer casual pauses, small mouth sounds, and direct reactions.
-
-Dialogue UI should look like a cute manga speech bubble:
-
-- Emotion-dependent fill and accent colors.
-- Thick black comic outline, heavier for high-intensity emotions.
-- Small speech-tail pointing toward the pet.
-- Cute font candidates such as `YouYuan`, `Comic Sans MS`, `Microsoft YaHei UI`, or platform equivalents.
-- Light use of symbols or emoji such as `♡`, `♪`, `✨`, `ฅ`; do not make every line noisy.
-
-## Interactive Question Mode
-
-The desktop shell includes an interactive question mode:
-
-- The user can open a small manga-styled question panel from the pet window.
 - Typed questions are answered by checking local pet documents first.
-- If local documents do not contain a useful answer, the request is passed to an AI provider interface.
-- If no AI provider is configured, the pet degrades naturally and asks the user to type more context instead of crashing.
-- Answers are shown through the same pet dialogue bubble and use the `review` mood so they still feel like Fujie rather than a generic assistant.
-
-Current local-search roots:
-
-- desktop project root
-- `transfer/` handoff folder
-
-The AI provider is currently an adapter boundary with an offline fallback. It is ready for a future OpenAI, local model, or other provider implementation without changing the UI contract.
-
-## Voice Interaction
-
-Voice interaction is part of the desktop shell:
-
-- Voice is enabled in the local config and uses `SpeechRecognition` plus `PyAudio` for microphone input.
-- The user can open the question panel with middle click or Ctrl+left click, then click `语音`.
-- Pressing `V` while the pet window has focus starts the same voice flow.
-- The pet first says `我在听，哥哥你说。`, then listens in a background thread so the animation does not freeze.
-- Recognized Chinese text is passed into interactive question mode, using local document search first and the AI-provider adapter/fallback after that.
-- The pet displays the answer in the manga speech bubble and sends the pet-styled reply to Windows speech synthesis when voice replies are enabled.
-- If recognition, microphone access, or speech output is unavailable, the pet falls back to the manga bubble and asks for typed input instead of crashing.
+- If local documents do not contain a useful answer, the pet replies with a local persona-based line. No external API is required.
+- Answers are shown through the pet dialogue bubble and use the `review` mood.
+- Voice can start from the `语音` button or the `V` hotkey while the pet window has focus.
 
 ## Reminder Behavior
 
@@ -100,10 +50,7 @@ Voice interaction is part of the desktop shell:
 - Late-night reminder after the configured night hour.
 - Weather reminder when weather data is available.
 - Weather should mention rain or sunny weather when detected.
-- Weather should record the resolved location and source, using a configured city first and IP-based location when no city is configured.
 
 ## Runtime Notes
 
-For a desktop shell, prefer high-resolution row strips over the final Codex `192x208` atlas cells. The Codex atlas is correct for Codex pets, but desktop display looks sharper when rendered from `assets/high-res-rows/`.
-
-Idle animation should stay calm and slow. Use a slower idle frame delay than active click/reaction states, and keep spontaneous idle talk/scare checks infrequent enough that the pet does not feel jittery.
+For a desktop shell, prefer high-resolution row strips over the final Codex `192x208` atlas cells. Idle animation should stay calm and slow.
