@@ -1,43 +1,95 @@
 # 富江 GitHub Sync Notes
 
-## Target
+Recommended repository:
+
+- `a974046927/fujie-codex-pet`
+
+Do not place this pet package inside unrelated repositories such as `v2rayN`
+unless explicitly requested.
+
+## Repository Layout
+
+Use this layout when uploading to GitHub under `fujie-codex-pet/`:
+
+```text
+fujie-codex-pet/README.md
+fujie-codex-pet/MAC_SYNC.md
+fujie-codex-pet/GITHUB_SYNC.md
+fujie-codex-pet/LOOP_ENGINEERING.md
+fujie-codex-pet/MANIFEST.sha256
+fujie-codex-pet/design/FUJIE_DESIGN_SPEC.md
+fujie-codex-pet/codex-pet-fujie/pet.json
+fujie-codex-pet/config/settings.json
+fujie-codex-pet/source/yoruame_pet/*.py
+fujie-codex-pet/tests/*.py
+fujie-codex-pet/qa/runtime-check.md
+fujie-codex-pet/qa/loop-engineering-baseline.md
+fujie-codex-pet/qa/codex-avatar-size.md
+```
+
+## Codex Pet Metadata
+
+```json
+{
+  "id": "fujie",
+  "displayName": "富江",
+  "description": "富江",
+  "spritesheetPath": "spritesheet.webp"
+}
+```
+
+## Current Local Evidence
+
+- Local Codex pet folder: `C:\Users\lenovo\.codex\pets\fujie`
+- Transfer ZIP: `E:\Codex 项目\杂谈\fujie-codex-pet-transfer.zip`
+- Desktop shell: `E:\Codex 项目\杂谈\yoruame-desktop-pet`
+- Tests: `42` passing via `python -m unittest discover -s tests -v`
+- Loop engineering baseline: `17/17` passing via
+  `python -m yoruame_pet.loop_benchmark`
+- Latest local commit: updated after each feature/fix sync
+
+## Current GitHub Status
+
+The connected GitHub account is `a974046927`. The only writable repository
+visible during the last sync check was:
+
+- `a974046927/v2rayN`
+
+The user requested a GitHub document rather than a new repository. The document
+has been created and verified:
 
 - Repository: `a974046927/v2rayN`
-- Folder: `fujie-codex-pet/`
-- Sync method: GitHub connector, not local `git push`, because local git login was unavailable.
+- Path: `fujie-codex-pet.md`
+- URL: `https://github.com/a974046927/v2rayN/blob/master/fujie-codex-pet.md`
+- Commit: `ad9370d40491dd71e26f6f46567b7a460669767a`
+- Blob SHA: `e97e9bde75d75191db4f89e2b15823e62e4baea4`
 
-## Latest Local Evidence
-
-- Local app path: `E:\Codex 项目\杂谈\yoruame-desktop-pet`
-- Transfer ZIP: `E:\Codex 项目\杂谈\fujie-codex-pet-transfer.zip`
-- Latest local commit: `9516457 Use Codex thread for pet dialogue`
-- Tests: `40` passing via `python -m unittest discover -s tests -v`
-- Loop engineering baseline: `16/16` passing via `python -m yoruame_pet.loop_benchmark`
-- Active runtime restarted as `pythonw.exe -m yoruame_pet`.
-
-## Dialogue Thread
-
-The Codex thread `添加宠物对话` is configured as the dedicated user/pet dialogue thread.
-
-- Thread id: `019ee5c4-f0b8-7951-87a0-2600aaabe3cd`
-- The thread was initialized with Fujie's pet persona and addressing rules.
-- Future conversation with the pet should happen directly in that Codex thread.
-- The desktop pet still keeps its local question panel and voice path; it does not create a second local chat log.
+New features and fixes are now synchronized into the `fujie-codex-pet/` folder
+inside `a974046927/v2rayN`, matching the user's requested location. A dedicated
+repository such as `a974046927/fujie-codex-pet` is still preferable if full
+binary assets should be hosted on GitHub later.
 
 ## Latest Feature Sync Scope
 
-- no external API required for desktop fallback replies
-- local document search remains first priority
-- unmatched desktop questions use local pet-style reply instead of mentioning missing external AI
-- Codex thread `添加宠物对话` is the direct display surface for user/pet dialogue
-- voice interaction remains available on the desktop pet
+The latest implemented feature batch includes:
 
-## Girl Persona Addressing Rule
-
-少女模式只能称呼用户为：
-
-- `夜雨哥哥`
-- `哥哥`
-- `凌凌哥哥`
-
-Bare `夜雨` must not appear as a girl-persona address.
+- click-region interaction behavior
+- affection, attention, persona, mood, and mood-intensity state
+- random scare and lower-frequency idle talk
+- double-click form switching
+- generated dialogue system
+- hard girl-persona addressing rule: only `夜雨哥哥`, `哥哥`, or `凌凌哥哥`
+- rest, movement, and late-night reminders
+- weather location/source tracking
+- interactive typed question mode
+- Codex thread `添加宠物对话` configured as the dedicated user/pet dialogue
+  thread
+- background voice question mode
+- Windows voice reply speaker
+- local document search
+- local pet-style fallback reply with no external API required
+- desktop Codex task-status bridge that reads local Codex session events
+- speech-recognition and PyAudio microphone dependencies installed
+- voice-recognition adapter with safe unavailable fallback
+- large desktop shell kept as canonical display; small Codex custom avatar
+  selection disabled after rolling back the transparent-atlas workaround

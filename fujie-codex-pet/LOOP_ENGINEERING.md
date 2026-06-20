@@ -1,11 +1,23 @@
 # Loop Engineering Baseline
 
-This project uses a local loop-engineering baseline to keep feature work from stopping at a design note.
+This project uses a local loop-engineering baseline to keep feature work from
+stopping at a design note.
+
+The loop is:
+
+1. List concrete requirements.
+2. Write tests that fail while the feature is missing.
+3. Implement the smallest working behavior.
+4. Run the full test suite.
+5. Run the local baseline command.
+6. Update transfer/GitHub sync documents.
+7. Restart the pet and verify the runtime process.
+8. Sync the latest changed files to GitHub under `fujie-codex-pet/`.
 
 ## Current Baseline
 
 ```text
-Loop engineering baseline: 16/16 checks pass.
+Loop engineering baseline: 17/17 checks pass.
 
 click_regions
 affection_attention_state
@@ -22,6 +34,7 @@ local_search
 local_pet_reply
 voice_interaction_flow
 voice_fallback
+codex_task_status_bridge
 github_sync_folder
 ```
 

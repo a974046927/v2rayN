@@ -1,6 +1,6 @@
 # Loop engineering baseline
 
-Loop engineering baseline: 16/16 checks pass.
+Loop engineering baseline: 17/17 checks pass.
 
 - `click_regions`: PASS - face/hair/body/hand/skirt_legs mapped
 - `affection_attention_state`: PASS - affection, attention, mood persist
@@ -17,4 +17,5 @@ Loop engineering baseline: 16/16 checks pass.
 - `local_pet_reply`: PASS - unmatched questions use local pet dialogue
 - `voice_interaction_flow`: PASS - recognized speech is answered and sent to voice reply
 - `voice_fallback`: PASS - voice recognizer degrades without crashing
+- `codex_task_status_bridge`: PASS - desktop pet reads local Codex task events
 - `github_sync_folder`: PASS - sync target is fujie-codex-pet/

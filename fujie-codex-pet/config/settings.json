@@ -19,5 +19,10 @@
     "timeout_seconds": 5,
     "tts_rate": 0,
     "tts_volume": 90
+  },
+  "codex_status": {
+    "enabled": true,
+    "poll_ms": 2500,
+    "show_seconds": 5
   }
 }
