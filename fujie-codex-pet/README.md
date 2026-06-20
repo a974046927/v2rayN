@@ -21,6 +21,7 @@ another machine, including a Mac.
 
 - Dialogue is generated from persona, emotion, trigger source, affection, and
   intensity instead of using fixed full-sentence templates.
+- Girl persona addressing is hard-limited to `夜雨哥哥`, `哥哥`, and `凌凌哥哥`.
 - Comic speech bubbles change color, accent marks, and outline weight by mood.
 - The desktop shell prefers high-resolution row strips so the pet does not look
   blurry when displayed larger than Codex atlas size.
@@ -30,8 +31,8 @@ another machine, including a Mac.
   AI-provider adapter when configured, otherwise degrades naturally.
 - Voice input is optional and safe: when unavailable, the pet asks for typed
   input instead of crashing.
-- Loop engineering baseline currently checks 14 requirement gates and is run
-  alongside the 37-test suite.
+- Loop engineering baseline currently checks 15 requirement gates and is run
+  alongside the 38-test suite.
 
 ## Codex Pet Metadata
 
