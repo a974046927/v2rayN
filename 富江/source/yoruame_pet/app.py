@@ -439,15 +439,22 @@ class YoruamePetApp:
         self.state.persona = action.persona
         self.state.save(self.state_path)
 
-    def answer_question(self, question: str) -> AssistantAnswer:
+    def _resolve_question(self, question: str) -> AssistantAnswer:
         answer = None
         if self.codex_dialogue is not None:
             answer = self.codex_dialogue.ask(question)
         if answer is None:
             answer = self.assistant.ask(question)
+        return answer
+
+    def _apply_question_answer(self, answer: AssistantAnswer) -> None:
         self.current_animation = "review"
         self.state.set_emotion("review", 5)
         self.say(answer.pet_line, seconds=8, mood="review", intensity=5)
+
+    def answer_question(self, question: str) -> AssistantAnswer:
+        answer = self._resolve_question(question)
+        self._apply_question_answer(answer)
         return answer
 
     def listen_for_question(self) -> VoiceResult:
@@ -490,13 +497,31 @@ class YoruamePetApp:
                 return
             self.say(f"我听到：{question}", seconds=3, mood="review", intensity=4)
             if self.root is not None:
-                self.root.after(700, lambda: self._answer_voice_question(question))
+                self.root.after(700, lambda: self._start_voice_answer(question))
             else:
-                self._answer_voice_question(question)
+                self._start_voice_answer(question)
             return
         self.current_animation = "waiting"
         self.state.set_emotion("calm", 4)
         self.say(result.message, seconds=6, mood="calm", intensity=4)
+
+    def _start_voice_answer(self, question: str) -> None:
+        self.current_animation = "waiting"
+        self.state.set_emotion("review", 4)
+        self.say("我去宠物对话问一下，哥哥等我一下。", seconds=12, mood="review", intensity=4)
+        thread = threading.Thread(target=self._voice_answer_worker, args=(question,), daemon=True)
+        thread.start()
+
+    def _voice_answer_worker(self, question: str) -> None:
+        answer = self._resolve_question(question)
+        if self.root is not None:
+            self.root.after(0, lambda: self._finish_voice_answer(answer))
+        else:
+            self._finish_voice_answer(answer)
+
+    def _finish_voice_answer(self, answer: AssistantAnswer) -> None:
+        self._apply_question_answer(answer)
+        self.voice_speaker.speak(answer.pet_line)
 
     def _answer_voice_question(self, question: str) -> AssistantAnswer:
         answer = self.answer_question(question)

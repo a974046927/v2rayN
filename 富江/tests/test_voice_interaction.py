@@ -182,6 +182,69 @@ class VoiceInteractionTests(unittest.TestCase):
         self.assertFalse(app.voice_listening)
         self.assertEqual(app.bubble_text, "听得到：你听得到吗")
 
+    def test_voice_codex_answer_runs_in_background_with_waiting_feedback(self):
+        from yoruame_pet.app import YoruamePetApp
+        from yoruame_pet.assistant_mode import AssistantAnswer
+        from yoruame_pet.voice import VoiceResult
+
+        class FakeRoot:
+            def after(self, _delay_ms, callback=None):
+                if callback is not None:
+                    callback()
+                return "after-id"
+
+        class FakeRecognizer:
+            def listen(self):
+                return VoiceResult(
+                    text="你听得到吗",
+                    available=True,
+                    message="我听到了。",
+                )
+
+        class SlowAssistant:
+            def __init__(self):
+                self.started = threading.Event()
+                self.release = threading.Event()
+
+            def ask(self, question: str) -> AssistantAnswer:
+                self.started.set()
+                self.release.wait(timeout=2)
+                return AssistantAnswer(
+                    text=f"听得到：{question}",
+                    source="codex_thread",
+                    pet_line=f"听得到：{question}",
+                    citations=[],
+                )
+
+        class FakeSpeaker:
+            def __init__(self):
+                self.spoken = []
+
+            def speak(self, text: str):
+                self.spoken.append(text)
+
+        app = YoruamePetApp(headless=True)
+        assistant = SlowAssistant()
+        speaker = FakeSpeaker()
+        app.root = FakeRoot()
+        app.voice_recognizer = FakeRecognizer()
+        app.assistant = assistant
+        app.voice_speaker = speaker
+
+        app.start_voice_interaction()
+
+        self.assertTrue(assistant.started.wait(timeout=1))
+        self.assertFalse(app.voice_listening)
+        self.assertIn("宠物对话", app.bubble_text)
+
+        assistant.release.set()
+        deadline = time.monotonic() + 2
+        while app.bubble_text != "听得到：你听得到吗" and time.monotonic() < deadline:
+            time.sleep(0.01)
+
+        self.assertEqual(app.bubble_text, "听得到：你听得到吗")
+        self.assertEqual(speaker.spoken, ["听得到：你听得到吗"])
+
     def test_voice_speaker_disabled_reports_safe_fallback(self):
         from yoruame_pet.voice import VoiceSpeaker
 

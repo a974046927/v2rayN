@@ -162,7 +162,7 @@ async function main() {
   const server = spawn(
     codexExe,
     ["-c", `service_tier="${startupTier}"`, "app-server", "--listen", url],
-    { stdio: ["ignore", "ignore", "pipe"] },
+    { stdio: ["ignore", "ignore", "pipe"], windowsHide: true },
   );
   let stderr = "";
   server.stderr.on("data", (chunk) => {

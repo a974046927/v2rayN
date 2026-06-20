@@ -26,3 +26,12 @@ Date: 2026-06-21
 - `python -m unittest discover -s tests -p 'test_*.py'`: 49 tests passing.
 - `python -m yoruame_pet.loop_benchmark`: 18/18 checks passing.
 - Real bridge smoke test returned: `收到，哥哥，桥接初始化正常。`
+
+## 2026-06-21 Console And Feedback Fix
+
+- The bridge now starts `node.exe` with `CREATE_NO_WINDOW` on Windows.
+- The helper starts the temporary `codex app-server` with `windowsHide: true`.
+- After speech recognition, the pet immediately shows `我去宠物对话问一下，哥哥等我一下。`.
+- The Codex thread request runs in a background worker, so the pet window does not appear frozen while waiting for the reply.
+- Verification: 51 unit tests passing; loop baseline remains 18/18.
+- Real voice-path simulation showed the waiting bubble first, then a Codex-thread reply in the pet bubble.

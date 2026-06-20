@@ -79,6 +79,15 @@ class CodexDialogueTests(unittest.TestCase):
         self.assertEqual(calls[0][0][0][:2], ["node.exe", "bridge.mjs"])
         self.assertTrue(calls[0][1]["text"])
         self.assertEqual(calls[0][1]["encoding"], "utf-8")
+        if hasattr(subprocess, "CREATE_NO_WINDOW"):
+            self.assertEqual(calls[0][1]["creationflags"], subprocess.CREATE_NO_WINDOW)
+
+    def test_node_helper_hides_spawned_codex_window(self):
+        helper = ROOT / "src" / "yoruame_pet" / "codex_app_bridge.mjs"
+
+        text = helper.read_text(encoding="utf-8")
+
+        self.assertIn("windowsHide: true", text)
 
 
 if __name__ == "__main__":

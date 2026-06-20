@@ -69,6 +69,7 @@ class NodeCodexDialogueClient:
             "startupServiceTier": self.startup_service_tier,
             "allowCreateOnResumeFailure": True,
         }
+        subprocess_options = self._hidden_subprocess_options()
         completed = self.runner(
             [self.node_exe, str(self.helper_script)],
             input=json.dumps(payload, ensure_ascii=False),
@@ -77,6 +78,7 @@ class NodeCodexDialogueClient:
             capture_output=True,
             timeout=self.timeout_seconds + 20,
             check=False,
+            **subprocess_options,
         )
         if completed.returncode != 0:
             detail = (completed.stderr or completed.stdout or "").strip()
@@ -94,6 +96,12 @@ class NodeCodexDialogueClient:
         if isinstance(thread_id, str) and thread_id:
             self.thread_id = thread_id
         return CodexDialogueResult(text=text, thread_id=self.thread_id)
+
+    def _hidden_subprocess_options(self) -> dict:
+        options = {}
+        if hasattr(subprocess, "CREATE_NO_WINDOW"):
+            options["creationflags"] = subprocess.CREATE_NO_WINDOW
+        return options
 
 
 class CodexDialogueBridge:
