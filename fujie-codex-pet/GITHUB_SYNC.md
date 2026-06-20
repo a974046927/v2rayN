@@ -41,8 +41,8 @@ fujie-codex-pet/qa/loop-engineering-baseline.md
 - Local Codex pet folder: `C:\Users\lenovo\.codex\pets\fujie`
 - Transfer ZIP: `E:\Codex 项目\杂谈\fujie-codex-pet-transfer.zip`
 - Desktop shell: `E:\Codex 项目\杂谈\yoruame-desktop-pet`
-- Tests: `37` passing via `python -m unittest discover -s tests -v`
-- Loop engineering baseline: `14/14` passing via
+- Tests: `38` passing via `python -m unittest discover -s tests -v`
+- Loop engineering baseline: `15/15` passing via
   `python -m yoruame_pet.loop_benchmark`
 - Latest local commit: updated after each feature/fix sync
 
@@ -76,6 +76,7 @@ The latest implemented feature batch includes:
 - random scare and lower-frequency idle talk
 - double-click form switching
 - generated dialogue system
+- hard girl-persona addressing rule: only `夜雨哥哥`, `哥哥`, or `凌凌哥哥`
 - rest, movement, and late-night reminders
 - weather location/source tracking
 - interactive typed question mode
