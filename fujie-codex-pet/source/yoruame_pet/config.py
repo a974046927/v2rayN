@@ -35,6 +35,8 @@ def default_config() -> dict[str, Any]:
                 "waiting": 380,
                 "review": 360,
                 "failed": 340,
+                "running": 420,
+                "jumping": 420,
             },
             "bubble": {
                 "fill": "#fffafc",
@@ -152,6 +154,7 @@ def default_config() -> dict[str, Any]:
             "idle_first_delay_ms": 12000,
             "scare_chance": 0.04,
             "idle_talk_chance": 0.12,
+            "idle_motion_chance": 0.1,
         },
         "voice": {
             "enabled": False,

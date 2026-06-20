@@ -18,6 +18,7 @@ class LoopBenchmarkTests(unittest.TestCase):
             "form_switch",
             "dialogue_system",
             "girl_addressing_rule",
+            "idle_motion_actions",
             "rest_reminder",
             "move_reminder",
             "late_night_reminder",

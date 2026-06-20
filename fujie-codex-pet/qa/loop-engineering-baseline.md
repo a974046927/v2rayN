@@ -1,6 +1,6 @@
 # Loop engineering baseline
 
-Loop engineering baseline: 17/17 checks pass.
+Loop engineering baseline: 18/18 checks pass.
 
 - `click_regions`: PASS - face/hair/body/hand/skirt_legs mapped
 - `affection_attention_state`: PASS - affection, attention, mood persist
@@ -8,6 +8,7 @@ Loop engineering baseline: 17/17 checks pass.
 - `form_switch`: PASS - double-click form switch action exists
 - `dialogue_system`: PASS - generated emotion dialogue is active
 - `girl_addressing_rule`: PASS - girl persona only uses 夜雨哥哥/哥哥/凌凌哥哥
+- `idle_motion_actions`: PASS - standby pool includes waving/running/jumping
 - `rest_reminder`: PASS - rest reminder due after focus interval
 - `move_reminder`: PASS - movement reminder due after sitting interval
 - `late_night_reminder`: PASS - late-night reminder due after configured hour

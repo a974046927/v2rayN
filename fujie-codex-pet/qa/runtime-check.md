@@ -16,8 +16,8 @@
 
 ## Verified
 
-- Unit tests pass with `python -m unittest discover -s tests -v`: `42` tests.
-- Loop engineering baseline passes: `17/17` checks.
+- Unit tests pass with bundled Python and `python -m unittest discover -s tests -v`: `43` tests.
+- Loop engineering baseline passes: `18/18` checks.
 - Speech recognition dependencies are installed in the bundled Python runtime:
   `SpeechRecognition 3.17.0` and `PyAudio 0.2.14`.
 - Audio device discovery works; 44 input/output devices were detected,
@@ -29,6 +29,9 @@
 - Default animation speed changed from `130ms` to `260ms` per frame; idle now
   uses a slower `520ms` state-specific frame delay.
 - Idle self-talk/scare checks now wait longer and trigger less often.
+- Standby ambient motion is restored: ordinary idle can now low-frequency
+  rotate through waving, running, and jumping, with running/jumping slowed to
+  `420ms` per frame.
 - Dialogue bubble changed from a plain rectangle to a comic-style rounded
   speech bubble with a tail, thicker black outline, cute font candidates, and
   slightly cuter symbol/emoji dialogue.

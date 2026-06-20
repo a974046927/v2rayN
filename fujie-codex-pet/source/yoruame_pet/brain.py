@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import random
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Iterable
@@ -111,6 +112,34 @@ class PetBrain:
             text=text,
             persona="mature",
             mood="scare",
+            intensity=state.mood_intensity,
+        )
+
+    def idle_action(self, state: PetState, seed: int | None = None) -> PetAction:
+        persona = state.persona
+        pool = [
+            ("waving", "happy", "face", 4),
+            ("running", "work", "running", 4),
+            ("jumping", "move", "move", 4),
+            ("waving", "happy", "hand", 3),
+            ("idle", "calm" if persona == "mature" else "happy", "hair", 3),
+        ]
+        index = random.randrange(len(pool)) if seed is None else seed % len(pool)
+        animation, mood, trigger, intensity = pool[index]
+        state.set_emotion(mood, intensity)
+        text = self.dialogue.line(
+            persona,
+            mood,
+            trigger,
+            seed=seed,
+            affection=state.affection,
+            intensity=state.mood_intensity,
+        )
+        return PetAction(
+            animation=animation,
+            text=text,
+            persona=persona,
+            mood=mood,
             intensity=state.mood_intensity,
         )
 

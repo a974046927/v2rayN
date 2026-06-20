@@ -50,6 +50,7 @@ def evaluate_loop_baseline() -> LoopReport:
         _check_form_switch(brain),
         _check_dialogue_system(brain),
         _check_girl_addressing_rule(brain),
+        _check_idle_motion_actions(brain),
         _check_rest_reminder(),
         _check_move_reminder(),
         _check_late_night_reminder(),
@@ -124,6 +125,13 @@ def _check_girl_addressing_rule(brain: PetBrain) -> LoopCheck:
         ok,
         "girl persona only uses 夜雨哥哥/哥哥/凌凌哥哥",
     )
+
+
+def _check_idle_motion_actions(brain: PetBrain) -> LoopCheck:
+    state = PetState(persona="girl")
+    animations = {brain.idle_action(state, seed=seed).animation for seed in range(12)}
+    ok = {"waving", "running", "jumping"} <= animations
+    return LoopCheck("idle_motion_actions", ok, "standby pool includes waving/running/jumping")
 
 
 def _check_rest_reminder() -> LoopCheck:

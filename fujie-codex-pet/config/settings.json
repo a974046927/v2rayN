@@ -6,7 +6,18 @@
     "scale": 1.0,
     "start_x": 1120,
     "start_y": 560,
-    "animation_ms": 260
+    "animation_ms": 260,
+    "animation_ms_by_state": {
+      "idle": 520,
+      "waiting": 380,
+      "review": 360,
+      "failed": 340,
+      "running": 420,
+      "jumping": 420
+    }
+  },
+  "dialogue": {
+    "idle_motion_chance": 0.1
   },
   "reminders": {
     "rest_minutes": 50,

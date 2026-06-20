@@ -307,6 +307,23 @@ class CoreBehaviorTests(unittest.TestCase):
         self.assertGreaterEqual(state.mood_intensity, 4)
         self.assertTrue(any(word in shy.text for word in ["别", "害羞", "裙"]))
 
+    def test_brain_idle_action_pool_includes_running_and_jumping(self):
+        from yoruame_pet.brain import PetBrain
+        from yoruame_pet.state import PetState
+
+        brain = PetBrain(["夜雨", "哥哥", "凌凌哥哥"])
+        state = PetState(persona="girl")
+
+        self.assertTrue(
+            hasattr(brain, "idle_action"),
+            "PetBrain should expose ambient idle actions for the standby loop",
+        )
+        animations = {brain.idle_action(state, seed=seed).animation for seed in range(24)}
+
+        self.assertIn("running", animations)
+        self.assertIn("jumping", animations)
+        self.assertIn("waving", animations)
+
     def test_brain_ignored_and_reminder_events_are_distinct(self):
         from yoruame_pet.brain import PetBrain
         from yoruame_pet.state import PetState

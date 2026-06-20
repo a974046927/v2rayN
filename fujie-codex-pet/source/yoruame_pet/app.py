@@ -326,9 +326,16 @@ class YoruamePetApp:
             self.show_action(self.brain.ignored(self.state, seed=self.rng.randint(0, 10000)))
         else:
             roll = self.rng.random()
-            if roll < float(self.config["dialogue"]["scare_chance"]):
+            scare_chance = float(self.config["dialogue"]["scare_chance"])
+            motion_chance = float(self.config["dialogue"].get("idle_motion_chance", 0.0))
+            talk_chance = float(self.config["dialogue"]["idle_talk_chance"])
+            if roll < scare_chance:
                 self.show_action(self.brain.scare(self.state, seed=self.rng.randint(0, 10000)))
-            elif roll < float(self.config["dialogue"]["idle_talk_chance"]):
+            elif roll < scare_chance + motion_chance:
+                self.show_action(
+                    self.brain.idle_action(self.state, seed=self.rng.randint(0, 10000))
+                )
+            elif roll < scare_chance + motion_chance + talk_chance:
                 action = self.brain.click(
                     self.state,
                     "face",
