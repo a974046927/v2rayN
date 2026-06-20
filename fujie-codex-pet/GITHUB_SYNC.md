@@ -84,5 +84,5 @@ The latest implemented feature batch includes:
 - local document search
 - AI-provider adapter with offline fallback
 - optional voice-recognition adapter with safe unavailable fallback
-- large desktop shell kept as canonical display; small Codex summon avatar
-  backed up and replaced with a transparent atlas
+- large desktop shell kept as canonical display; small Codex custom avatar
+  selection disabled after rolling back the transparent-atlas workaround
