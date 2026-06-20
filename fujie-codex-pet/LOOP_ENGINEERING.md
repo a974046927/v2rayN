@@ -1,7 +1,6 @@
 # Loop Engineering Baseline
 
-This project uses a local loop-engineering baseline to keep feature work from
-stopping at a design note.
+This project uses a local loop-engineering baseline to keep feature work from stopping at a design note.
 
 The loop is:
 
@@ -17,7 +16,7 @@ The loop is:
 ## Current Baseline
 
 ```text
-Loop engineering baseline: 15/15 checks pass.
+Loop engineering baseline: 16/16 checks pass.
 
 click_regions
 affection_attention_state
@@ -32,6 +31,7 @@ weather_location_source
 interactive_question_mode
 local_search
 ai_adapter_fallback
+voice_interaction_flow
 voice_fallback
 github_sync_folder
 ```
