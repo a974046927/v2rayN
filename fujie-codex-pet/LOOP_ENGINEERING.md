@@ -17,13 +17,14 @@ The loop is:
 ## Current Baseline
 
 ```text
-Loop engineering baseline: 14/14 checks pass.
+Loop engineering baseline: 15/15 checks pass.
 
 click_regions
 affection_attention_state
 random_scare
 form_switch
 dialogue_system
+girl_addressing_rule
 rest_reminder
 move_reminder
 late_night_reminder
