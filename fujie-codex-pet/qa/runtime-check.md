@@ -9,6 +9,10 @@
 - Fallback renderer: Codex atlas
   `C:\Users\lenovo\.codex\pets\yoruame-kagehime\spritesheet.webp`
 - Active runtime: one `pythonw.exe -m yoruame_pet` process confirmed.
+- Codex built-in custom avatar selection has been disabled in
+  `C:\Users\lenovo\.codex\config.toml` by commenting out
+  `selected-avatar-id = "custom:yoruame-kagehime"`. The active small-avatar
+  spritesheet is restored and remains non-transparent.
 
 ## Verified
 
@@ -50,6 +54,12 @@
   city first and IP lookup when no city is configured.
 - Latest implemented modules include local search, AI-provider fallback,
   assistant question mode, voice fallback, and loop benchmark.
+- Large desktop shell is the canonical display. The built-in Codex avatar atlas
+  was already measured at `198/208px` content height, so the small visible size
+  came from Codex's fixed avatar renderer rather than image padding.
+- The transparent-atlas workaround was rolled back because it still leaves a
+  second avatar renderer active. The final approach is to stop selecting the
+  Codex built-in custom avatar and use the large desktop shell as the pet.
 
 ## Manual Items To Confirm
 
